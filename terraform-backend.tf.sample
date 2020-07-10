@@ -1,0 +1,12 @@
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "resource-group-name-of-the-storage-used-for-the-state-file"
+    storage_account_name = "name-of-the-storage-used-for-the-state-file"
+    container_name       = "name-of-the-container-on-the-blob-storage-used-for-the-state-file"
+    key           = "state-file-name-key"    
+    subscription_id = "00000000-0000-0000-0000-00000000000"
+    client_id = "00000000-0000-0000-0000-00000000000"
+    client_secret = "AAAAAA.AAAAAAAAAAAAAAAAAAAAA-AAAA"
+    tenant_id = "00000000-0000-0000-0000-00000000000"
+  }
+}
