@@ -47,7 +47,7 @@ resource "kubernetes_deployment" "ingress" {
           image_pull_policy = "IfNotPresent"
           env {
               name = "POD_NAME"
-              value = kubernetes_deployment.ingress.metadata[0].name
+              value = "ingress-nginx-controller"
           }
           env {
               name = "POD_NAMESPACE"
