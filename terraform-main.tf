@@ -53,4 +53,7 @@ module "ingress" {
 module "cert-manager" {
     # Module reference via path
     source                  = "./modules/cert-manager"
+    namespace               = var.certmanager-namespace
+    emailproduction         = var.certmanager-emailproduction
+    emailstaging            = var.certmanager-emailstaging
 }
