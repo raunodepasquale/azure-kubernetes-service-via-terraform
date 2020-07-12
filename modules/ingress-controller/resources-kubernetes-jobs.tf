@@ -4,7 +4,7 @@ resource "kubernetes_job" "admission-create" {
     labels = {
         "app.kubernetes.io/name" = "ingress-nginx"
         "app.kubernetes.io/instance" = "ingress-nginx"
-        "app.kubernetes.io/component" = "controller"
+        "app.kubernetes.io/component" = "admission-webhook"
     }
     namespace = var.namespace
   }
@@ -15,11 +15,12 @@ resource "kubernetes_job" "admission-create" {
           labels = {
             "app.kubernetes.io/name" = "ingress-nginx"
             "app.kubernetes.io/instance" = "ingress-nginx"
-            "app.kubernetes.io/component" = "controller"
+            "app.kubernetes.io/component" = "admission-webhook"
           }
       }
       spec {
         restart_policy = "OnFailure"
+        automount_service_account_token = true
         service_account_name = "ingress-nginx-admission"
         container {
           name    = "create"
@@ -38,6 +39,7 @@ resource "kubernetes_job" "admission-create" {
         }
       }
     }
+    backoff_limit = 6
   }
 depends_on = [
     kubernetes_namespace.ingress,
@@ -62,7 +64,7 @@ resource "kubernetes_job" "admission-patch" {
     labels = {
         "app.kubernetes.io/name" = "ingress-nginx"
         "app.kubernetes.io/instance" = "ingress-nginx"
-        "app.kubernetes.io/component" = "controller"
+        "app.kubernetes.io/component" = "admission-webhook"
     }
     namespace = var.namespace
   }
@@ -73,11 +75,12 @@ resource "kubernetes_job" "admission-patch" {
           labels = {
             "app.kubernetes.io/name" = "ingress-nginx"
             "app.kubernetes.io/instance" = "ingress-nginx"
-            "app.kubernetes.io/component" = "controller"
+            "app.kubernetes.io/component" = "admission-webhook"
           }
       }
       spec {
         restart_policy = "OnFailure"
+        automount_service_account_token = true
         service_account_name = "ingress-nginx-admission"
         container {
           name    = "patch"
@@ -99,6 +102,7 @@ resource "kubernetes_job" "admission-patch" {
         }
       }
     }
+    backoff_limit = 6
   }
 depends_on = [
     kubernetes_namespace.ingress,

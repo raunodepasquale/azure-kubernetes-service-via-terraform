@@ -34,6 +34,7 @@ resource "kubernetes_deployment" "ingress" {
       spec {
         dns_policy = "ClusterFirst"
         service_account_name = "ingress-nginx"
+        automount_service_account_token = true
         termination_grace_period_seconds = 300
         volume {
             name = "webhook-cert"
