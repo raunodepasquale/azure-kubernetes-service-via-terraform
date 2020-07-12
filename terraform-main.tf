@@ -14,7 +14,8 @@ module "network" {
     subnet_cidr             = var.subnet_cidr
 }
 module "kubernetes" {
-    # Module reference via path
+    # Module reference via path (azurerm-kubernetes-cluster for AKS or azurerm-kubernetes-cluster-ad-integrated to have aks with rbac integrated with Azure AD)
+    # azurerm-kubernetes-cluster-ad-integrated requires the services principal used to interact with Azure to have Global Admin rights in Azure AD
     source                  = "./modules/azurerm-kubernetes-cluster"
     # values for module variables
     prefix                  = var.prefix
