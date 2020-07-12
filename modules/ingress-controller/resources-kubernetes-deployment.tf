@@ -152,6 +152,9 @@ resource "kubernetes_deployment" "ingress" {
     kubernetes_cluster_role_binding.ingress,
     kubernetes_cluster_role_binding.admission,
     kubernetes_role_binding.ingress,
-    kubernetes_role_binding.admission
+    kubernetes_role_binding.admission,
+    kubernetes_validating_webhook_configuration.ingress,
+    kubernetes_service_account.ingress,
+    kubernetes_service_account.admission
   ]
 }

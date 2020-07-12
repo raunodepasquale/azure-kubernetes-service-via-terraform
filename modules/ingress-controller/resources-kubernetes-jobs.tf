@@ -41,6 +41,17 @@ resource "kubernetes_job" "admission-create" {
   }
 depends_on = [
     kubernetes_namespace.ingress,
+    kubernetes_validating_webhook_configuration.ingress,
+    kubernetes_role.ingress,
+    kubernetes_role.admission,
+    kubernetes_cluster_role.ingress,
+    kubernetes_cluster_role.admission,
+    kubernetes_cluster_role_binding.ingress,
+    kubernetes_cluster_role_binding.admission,
+    kubernetes_role_binding.ingress,
+    kubernetes_role_binding.admission,
+    kubernetes_validating_webhook_configuration.ingress,
+    kubernetes_service_account.ingress,
     kubernetes_service_account.admission
 ]
 }
@@ -91,6 +102,18 @@ resource "kubernetes_job" "admission-patch" {
   }
 depends_on = [
     kubernetes_namespace.ingress,
+    kubernetes_validating_webhook_configuration.ingress,
+    kubernetes_job.admission-create,
+    kubernetes_role.ingress,
+    kubernetes_role.admission,
+    kubernetes_cluster_role.ingress,
+    kubernetes_cluster_role.admission,
+    kubernetes_cluster_role_binding.ingress,
+    kubernetes_cluster_role_binding.admission,
+    kubernetes_role_binding.ingress,
+    kubernetes_role_binding.admission,
+    kubernetes_validating_webhook_configuration.ingress,
+    kubernetes_service_account.ingress,
     kubernetes_service_account.admission
 ]
 }

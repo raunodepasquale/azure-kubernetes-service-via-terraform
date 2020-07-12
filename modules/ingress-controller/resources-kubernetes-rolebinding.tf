@@ -18,6 +18,11 @@ resource "kubernetes_role_binding" "ingress" {
     name      = kubernetes_service_account.ingress.metadata[0].name
     namespace = var.namespace
   }
+   depends_on = [
+    kubernetes_namespace.ingress,
+    kubernetes_role.admission,
+    kubernetes_service_account.admission
+]
 }
 
 resource "kubernetes_role_binding" "admission" {
@@ -40,4 +45,9 @@ resource "kubernetes_role_binding" "admission" {
     name      = kubernetes_service_account.admission.metadata[0].name
     namespace = var.namespace
   }
+    depends_on = [
+    kubernetes_namespace.ingress,
+    kubernetes_role.admission,
+    kubernetes_service_account.admission
+]
 }

@@ -54,6 +54,9 @@ rule {
     resources  = ["events"]
     verbs      = ["patch","create"]
   }
+  depends_on = [
+    kubernetes_namespace.ingress
+  ]
 }
 
 resource "kubernetes_role" "admission" {
@@ -72,4 +75,7 @@ resource "kubernetes_role" "admission" {
     resources  = ["secrets"]
     verbs      = ["get","create"]
   }
+  depends_on = [
+    kubernetes_namespace.ingress
+  ]
 }

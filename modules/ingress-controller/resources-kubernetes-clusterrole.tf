@@ -43,6 +43,9 @@ resource "kubernetes_cluster_role" "ingress" {
     resources  = ["ingressclasses"]
     verbs      = ["get","list","watch"]
   }
+depends_on = [
+    kubernetes_namespace.ingress
+]
 }
 
 resource "kubernetes_cluster_role" "admission" {
@@ -60,5 +63,8 @@ resource "kubernetes_cluster_role" "admission" {
     resources  = ["validatingwebhookconfigurations"]
     verbs      = ["get", "update"]
   }
+  depends_on = [
+    kubernetes_namespace.ingress
+]
 }
 
