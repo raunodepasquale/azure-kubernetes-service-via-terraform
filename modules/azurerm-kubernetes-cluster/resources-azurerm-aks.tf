@@ -17,7 +17,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enable_auto_scaling = var.enable_auto_scaling
     enable_node_public_ip = var.enable_node_public_ip
     orchestrator_version = var.orchestrator_version
-    vnet_subnet_id = azurerm_subnet.k8s.id
+    vnet_subnet_id = var.subnet_id
   }
   service_principal {
     client_id     = azuread_application.aks_sp.application_id
@@ -43,8 +43,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     env = var.env
   }
   depends_on = [
-    null_resource.delay,
-    azuread_service_principal.aks-aad-srv,
     azurerm_role_assignment.aks_sp_role_assignment,
     azuread_service_principal_password.aks_sp_pwd
   ]

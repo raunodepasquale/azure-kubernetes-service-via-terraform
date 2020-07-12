@@ -15,7 +15,7 @@ module "network" {
 }
 module "kubernetes" {
     # Module reference via path
-    source                  = "./modules/azurerm-kubernetes-cluster-ad-integrated"
+    source                  = "./modules/azurerm-kubernetes-cluster"
     # values for module variables
     prefix                  = var.prefix
     env                     = var.env

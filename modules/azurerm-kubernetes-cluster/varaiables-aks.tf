@@ -54,3 +54,6 @@ variable "docker_bridge_cidr" {
   description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes, it must not conflict with the other networks"
 }
 
+variable "subnet_id" {
+  description = "ID of the subnet where the nodes will be created"
+}
