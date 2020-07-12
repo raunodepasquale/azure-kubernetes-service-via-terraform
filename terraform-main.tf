@@ -48,3 +48,8 @@ module "ingress" {
     locationcode            = var.locationcode
     location                = var.location
 }
+
+module "cert-manager" {
+    # Module reference via path
+    source                  = "./modules/cert-manager"
+}

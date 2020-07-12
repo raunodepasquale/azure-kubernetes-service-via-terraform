@@ -1,14 +1,9 @@
-resource "null_resource" "delay" {
-  provisioner "local-exec" {
-    command = "sleep 60"
-  }
-}
 resource "helm_release" "cert-manager" {
   name  = "cert-manager"
-  chart = "jetstack/cert-manager"
-  repository = data.helm_repository.jetstack.metadata[0].name
+  chart = "cert-manager"
+  repository = "https://charts.jetstack.io"
   namespace = "cert-manager"
-  version = "v.0.15.1"
+  version = "v0.15.2"
 
   set {
     name  = "installCRDs"
@@ -19,3 +14,5 @@ resource "helm_release" "cert-manager" {
     kubernetes_namespace.cert-manager
   ]
 }
+
+
