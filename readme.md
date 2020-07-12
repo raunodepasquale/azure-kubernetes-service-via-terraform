@@ -18,10 +18,15 @@ It is also recommended, but not mandatory, to copy terraform-backend.tf.sample i
 
 Check the values in variables-aks.tf; variables-networks.tf; variables-project.tf in he root folder and correct if and where required for your specific needs.
 Position in the root folder of the repo and execute: 
+
 terraform init 
+
 terraform validate 
+
 terraform plan -out=plan 
+
 terraform apply "plan"  
+
 
 Please check the output of each command to verify issues or errors. 
 
