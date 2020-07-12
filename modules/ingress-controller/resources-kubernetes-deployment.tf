@@ -140,4 +140,18 @@ resource "kubernetes_deployment" "ingress" {
       }
     }
   }
+  depends_on = [
+    null_resource.delay,
+    kubernetes_namespace.ingress,
+    kubernetes_validating_webhook_configuration.ingress,
+    kubernetes_job.admission-create,
+    kubernetes_role.ingress,
+    kubernetes_role.admission,
+    kubernetes_cluster_role.ingress,
+    kubernetes_cluster_role.admission,
+    kubernetes_cluster_role_binding.ingress,
+    kubernetes_cluster_role_binding.admission,
+    kubernetes_role_binding.ingress,
+    kubernetes_role_binding.admission
+  ]
 }

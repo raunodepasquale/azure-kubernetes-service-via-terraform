@@ -8,6 +8,9 @@ resource "kubernetes_service_account" "ingress" {
     }
     namespace = var.namespace
   }
+depends_on = [
+    kubernetes_namespace.ingress
+]
 }
 
 resource "kubernetes_service_account" "admission" {
@@ -20,4 +23,7 @@ resource "kubernetes_service_account" "admission" {
     }
     namespace = var.namespace
   }
+depends_on = [
+    kubernetes_namespace.ingress
+]
 }

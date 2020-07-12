@@ -9,4 +9,8 @@ resource "kubernetes_config_map" "ingress" {
     namespace = var.namespace
   }
   data = {}    
+depends_on = [
+    null_resource.delay,
+    kubernetes_namespace.ingress
+]
 }

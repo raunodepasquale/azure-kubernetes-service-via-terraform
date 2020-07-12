@@ -39,6 +39,9 @@ resource "kubernetes_job" "admission-create" {
       }
     }
   }
+depends_on = [
+    kubernetes_namespace.ingress
+]
 }
 
 resource "kubernetes_job" "admission-patch" {
@@ -85,4 +88,7 @@ resource "kubernetes_job" "admission-patch" {
       }
     }
   }
+depends_on = [
+    kubernetes_namespace.ingress
+]
 }

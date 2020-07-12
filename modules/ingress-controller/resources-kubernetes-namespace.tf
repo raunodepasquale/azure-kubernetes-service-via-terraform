@@ -1,3 +1,8 @@
+resource "null_resource" "delay" {
+  provisioner "local-exec" {
+    command = "sleep 60"
+  }
+}
 resource "kubernetes_namespace" "ingress" {
   metadata {
     annotations = {
@@ -11,4 +16,8 @@ resource "kubernetes_namespace" "ingress" {
 
     name = var.namespace
   }
+  depends_on = [
+    null_resource.delay,
+    azurerm_public_ip.ingress
+  ]
 }
