@@ -10,7 +10,7 @@ resource "kubernetes_role_binding" "ingress" {
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
+    kind      = "Role"
     name      = kubernetes_role.ingress.metadata[0].name
   }
   subject {
@@ -37,7 +37,7 @@ resource "kubernetes_role_binding" "admission" {
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
+    kind      = "Role"
     name      = kubernetes_role.admission.metadata[0].name
   }
   subject {
