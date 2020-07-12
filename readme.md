@@ -4,6 +4,27 @@
 
 The current version has been tested as fully functional, please feel free to report any issue you may find.
 
+## How to use it
+
+Release 0.1.0 with the tests completed for the creation of the cluster, with ingress controller, cert-manager and cluster issuers for HTTP validation of Let's Encrypt certificates. Tests done for standard AKS RBAC setup and for the AKS RBAC setup with integration with Azure AD. 
+
+Pre-requisite to use it is to have an Azure Subscription. To be Global Admin of an Azure AD Tenant is an additional pre-requisite to use the AKS AD Integration module. 
+
+To use it: 
+
+get a local copy of the repo, select or create a service principal with at least the contributor role in the target subscription. Copy the file terraform.tfvars.sample into terraform.tfvars and replace the values with the correct one for your setup. 
+
+It is also recommended, but not mandatory, to copy terraform-backend.tf.sample in terraform-backend.tf and replace the values with the one of a storage created to host the state file. 
+
+Check the values in variables-aks.tf; variables-networks.tf; variables-project.tf in he root folder and correct if and where required for your specific needs.
+Position in the root folder of the repo and execute: 
+terraform init 
+terraform validate 
+terraform plan -out=plan 
+terraform apply "plan"  
+
+Please check the output of each command to verify issues or errors. 
+
 ## Description
 
 Setup with modules, one for a standard AKS with no Azure AD integration, one (the one used in the terraform-main.tf) with RBAC integrated with Azure AD.
