@@ -6,6 +6,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = "aks-${var.prefix}-${var.env}-${var.locationcode}"
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   kubernetes_version = var.orchestrator_version
+  node_resource_group = "rg-aks-${var.prefix}-${var.env}-${var.locationcode}-nodes"
 
   default_node_pool {
     name            = "default"

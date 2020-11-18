@@ -77,6 +77,7 @@ module "ingress" {
     env                     = var.env
     locationcode            = var.locationcode
     location                = var.location
+    aksnoderg              = module.kunernetes.node_resource_group
 
     depends_on = [
         module.aks-local-config-set
