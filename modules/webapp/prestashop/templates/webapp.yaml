@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: prestashop-ingress
+  name: site-ingress
   namespace: {{ .Values.namespace.name }}
   annotations:  
     kubernetes.io/ingress.class: nginx
@@ -19,7 +19,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.app.hostname }}
-    secretName: prestashop-secret-tls
+    secretName: site-secret-tls
   rules:
   - host: {{ .Values.app.hostname }}
     http:
@@ -71,8 +71,8 @@ spec:
         tier: web
     spec:
       containers:
-      - image: prestashop/prestashop:1.7.6-apache
-        name: prestashop
+      - image: wordpress
+        name: wordpress
         readinessProbe:
           httpGet:
             path: /
@@ -86,19 +86,13 @@ spec:
           timeoutSeconds: 5
           periodSeconds: 15
         env:
-        - name: PS_DOMAIN
-          value: {{ .Values.app.hostname }}
-        - name: ADMIN_MAIL
-          value: {{ .Values.app.admin }}
-        - name: PS_INSTALL_DB
-          value: "1" 
-        - name: PS_FOLDER_ADMIN
-          value: adminsection  
-        - name: DB_SERVER
+        - name: WORDPRESS_DB_NAME
+          value: "demosite"     
+        - name: WORDPRESS_DB_HOST
           value: mysql
-        - name: DB_USER
+        - name: WORDPRESS_DB_USER
           value: root
-        - name: DB_PASSWD
+        - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-pass

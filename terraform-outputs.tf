@@ -39,7 +39,7 @@ output "webapphostname" {
 }
 
 output "zz-finalcomment" {
-  value = "It's time to configure your Prestashop connecting to ${lower("${var.webhostname}.${var.webbasedns}")}"
+  value = "It's time to configure your Wordpress Site connecting to ${lower("${var.webhostname}.${var.webbasedns}")}"
 }
 
 

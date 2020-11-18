@@ -28,7 +28,7 @@ metadata:
   name: mysql-pv-claim
   namespace: {{ .Values.namespace.name }}
   labels:
-    app: prestashop
+    app: {{ .Values.app.name }}
 spec:
   accessModes:
     - ReadWriteOnce

@@ -1,6 +1,6 @@
-resource "helm_release" "prestashop" {
-  name  = "prestashop"
-  chart = "prestashop"
+resource "helm_release" "website" {
+  name  = "website"
+  chart = "website"
   repository = "./modules/webapp"
   version = "1.0.0"
 
