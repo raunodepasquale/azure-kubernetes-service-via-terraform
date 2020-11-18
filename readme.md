@@ -3,6 +3,9 @@
 ## Current status
 
 The current version has been tested as fully functional, please feel free to report any issue you may find. 
+
+## Pre-Requisites
+
 Terraform version 0.13 and AZ Cli are required to execute the template. 
 An Azure tenant and an Azure subscription are required as a Cloudflare DNS. 
 
@@ -16,9 +19,7 @@ Authentication for the Kubernetes provider has been changed to avoid authenticat
 
 ## How to use it
 
-Release 0.2.0 with the tests completed for the creation of the cluster, with ingress controller, cert-manager and cluster issuers for HTTP validation of Let's Encrypt certificates. 
-
-Pre-requisite to use it is to have an Azure Subscription. 
+Release 0.2.0 with the tests completed for the creation of the cluster, with ingress controller, cert-manager and cluster issuers for HTTP validation of Let's Encrypt certificates.  
 
 To use it: 
 
