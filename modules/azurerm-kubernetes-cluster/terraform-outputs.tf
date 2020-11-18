@@ -22,3 +22,22 @@ output "host" {
   value = azurerm_kubernetes_cluster.aks.kube_config.0.host
 }
 
+output "aksadmingroup" {
+  value = azuread_group.aks_admin_group.name
+}
+
+output "aksadminuser" {
+  value = "aks-admin-${var.prefix}-${var.env}-${var.locationcode}@${var.tenantdomain}"
+}
+
+output "aksadminuserpassword" {
+  value = random_password.aks_user_pwd.result
+}
+
+output "aksname" {
+  value = azurerm_kubernetes_cluster.aks.name
+}
+
+output "aksreourcegroup" {
+  value = azurerm_kubernetes_cluster.aks.resource_group_name
+}

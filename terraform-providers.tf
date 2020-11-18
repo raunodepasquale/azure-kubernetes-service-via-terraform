@@ -9,7 +9,6 @@ provider "azurerm" {
 
 provider "azuread" {
   version = "=1.0.0"
-  subscription_id = var.azsubscriptionid
   client_id = var.azclientid
   client_secret = var.azclientsecret
   tenant_id = var.aztenantid
@@ -17,20 +16,17 @@ provider "azuread" {
 
 provider "kubernetes" {
   version = "1.13.3"
-  host                   = module.kubernetes.host
-  client_certificate     = base64decode(module.kubernetes.client_certificate)
-  client_key             = base64decode(module.kubernetes.client_key)
-  cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
+  load_config_file = "true"
+  config_context = "${module.kubernetes.aksname}-admin"
+  config_context_cluster = module.kubernetes.aksname
 }
 
 provider "helm" {
   version = "1.3.2"
   kubernetes {
-    host     = module.kubernetes.host
-
-    client_certificate     = base64decode(module.kubernetes.client_certificate)
-    client_key             = base64decode(module.kubernetes.client_key)
-    cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
+    load_config_file = "true"
+    config_context = "${module.kubernetes.aksname}-admin"
+    config_context_cluster = module.kubernetes.aksname
   }
 }
 

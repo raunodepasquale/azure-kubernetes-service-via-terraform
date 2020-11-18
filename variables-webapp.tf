@@ -11,6 +11,11 @@ variable "webappnamespace" {
   description = "The name of the namespace used to host the webapp"
 }
 
+variable "webappname" {
+  description = "The name of the app used to label resources"
+  default = "webapp"
+}
+
 variable "cpu_limit" {
   description = "The default CPU Limit"
   default = "250m"
@@ -58,7 +63,7 @@ variable "quota_pod" {
 
 variable "database_disk" {
   description = "The disk space to be provisioned for the database"
-  default = "4gi"
+  default = "4Gi"
 }
 
 variable "webappissuer_name" {

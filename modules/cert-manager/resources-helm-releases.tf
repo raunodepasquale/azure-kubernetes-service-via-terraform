@@ -2,7 +2,6 @@ resource "helm_release" "cert-manager" {
   name  = "cert-manager"
   chart = "cert-manager"
   repository = "https://charts.jetstack.io"
-  namespace = "cert-manager"
   version = "v1.0.4"
 
   set {
@@ -19,7 +18,6 @@ resource "helm_release" "issuers" {
   name  = "issuers"
   chart = "issuers"
   repository = "./modules/cert-manager"
-  namespace = "cert-manager"
   version = "1.0.0"
 
   set {

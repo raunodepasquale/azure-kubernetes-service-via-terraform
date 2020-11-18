@@ -18,3 +18,6 @@ variable "locationcode" {
   default = "we"
 }
 
+variable "tenantdomain" {
+  description = "The default email domain for the tenant in Azure Active Directory"
+}

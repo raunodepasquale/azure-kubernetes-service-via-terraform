@@ -25,12 +25,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
     client_id     = azuread_application.aks_sp.application_id
     client_secret = random_password.aks_sp_pwd.result
   }
-  azure_active_directory {
-    managed     = true
-    admin_group_objects_ids = var.admin_group_objects_ids
-  }
+
   role_based_access_control {
     enabled = true
+    azure_active_directory {
+      managed     = true
+      admin_group_object_ids = concat(var.admin_group_objects_ids, [azuread_group.aks_admin_group.id])
+    }
   }
   network_profile {
       network_plugin = var.network_plugin

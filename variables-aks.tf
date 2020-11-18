@@ -40,7 +40,7 @@ variable "enable_node_public_ip" {
 
 variable "orchestrator_version" {
   description = "The kubernetes version to be used"
-  default = "1.16.10"
+  default = "1.18.10"
 }
 
 variable "network_plugin" {
@@ -66,10 +66,6 @@ variable "dns_service_ip" {
 variable "docker_bridge_cidr" {
   description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes, it must not conflict with the other networks"
   default = "172.31.255.1/24"
-}
-
-variable "admin_group_objects_ids" {
-  description = "A list of Objects IDs of Azure Active Directory Groups which should have Admin Role on the Cluster, it can be left empty if none required"
 }
 
 variable "api_server_authorized_ip_ranges" {
@@ -100,3 +96,8 @@ variable "scale_down_utilization_threshold" {
   description = "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down"
   default = 0.4
 }
+
+variable "admin_group_objects_ids" {
+  description = "List of groups, using objectid, to be assigned to the AKS cluster admin role"
+}
+

@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: prestashop-ingress
@@ -71,7 +71,7 @@ spec:
         tier: web
     spec:
       containers:
-      - image: prestashop:1.7
+      - image: prestashop/prestashop:1.7.6-apache
         name: prestashop
         readinessProbe:
           httpGet:

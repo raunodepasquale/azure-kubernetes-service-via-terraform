@@ -2,6 +2,11 @@ variable "namespace" {
   description = "The name of the namespace used to host the webapp"
 }
 
+variable "appname" {
+  description = "The name of the app used to label resources"
+  default = "webapp"
+}
+
 variable "cpu_limit" {
   description = "The default CPU Limit"
   default = "250m"

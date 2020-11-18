@@ -58,7 +58,7 @@ resource "helm_release" "prestashop" {
   }
   set {
     name  = "database.password"
-    value = base64decode(random_password.databasepassword.result)
+    value = base64encode(random_password.databasepassword.result)
   }
   set {
     name  = "issuer.name"

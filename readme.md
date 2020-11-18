@@ -2,10 +2,17 @@
 
 ## Current status
 
-The current version has been tested as fully functional, please feel free to report any issue you may find. Compared with Release 0.1.0 we have updated the provider versions and the AKS definition, adding scaling rules, IP filtering on access to API and unified the setup to one AKS module only, using the managed identity to integrate authentication with Azure AD, removing the need for a specific module and for the creation of a server and client application in Azure AD to manage the authentication. 
+The current version has been tested as fully functional, please feel free to report any issue you may find. 
+Terraform version 0.13 and AZ Cli are required to execute the template. 
+An Azure tenant and an Azure subscription are required as a Cloudflare DNS. 
+
+## Changes from Release 0.1.0
+
+Compared with Release 0.1.0 we have updated all the providers and the AKS definition, adding scaling rules, IP filtering on access to API and unified the setup to one AKS module only, using the managed identity to integrate authentication with Azure AD, removing the need for a specific module and for the creation of a server and client application in Azure AD to manage the authentication. 
 CertManager has also been upgraded to version 1. 
 Ingress controller updated and moved from HCL with Kubernetes provider to Helm. 
-
+A test application, with a vanilla setup of Prestashop has been added, with DNS name registration with Cloudflare, has been added to demonstrate application deployment and usage of ingress controller and cert-manager to have https access with a valid certificate. 
+Authentication for the Kubernetes provider has been changed to avoid authentication errors due to the usage of Azure AD. 
 
 ## How to use it
 

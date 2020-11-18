@@ -22,6 +22,7 @@ module "kubernetes" {
     locationcode            = var.locationcode
     location                = var.location
     azsubscriptionid        = var.azsubscriptionid
+    tenantdomain            = var.tenantdomain
     node_count              = var.node_count
     node_min_count          = var.node_min_count
     node_max_count          = var.node_max_count
@@ -52,6 +53,22 @@ module "kubernetes" {
 
 }
 
+module "aks-local-config-set" {
+    # Module reference via path
+    source                  = "./modules/aks-config-set"
+    # values for module variables
+    aksadminuser = module.kubernetes.aksadminuser
+    aksadminuserpassword = module.kubernetes.aksadminuserpassword
+    azsubscriptionid = var.azsubscriptionid
+    aksname = module.kubernetes.aksname
+    aksresourcegroup = module.kubernetes.aksreourcegroup
+    
+    depends_on = [
+        module.kubernetes
+    ]
+
+}
+
 module "ingress" {
     # Module reference via path
     source                  = "./modules/ingress-controller"
@@ -62,7 +79,7 @@ module "ingress" {
     location                = var.location
 
     depends_on = [
-        module.kubernetes
+        module.aks-local-config-set
     ]
 
 }
@@ -111,6 +128,7 @@ module "cloudflare-dns" {
     quota_pod = var.quota_pod
     database_disk = var.database_disk
     issuer_name = var.webappissuer_name
+    appname = var.webappname
 
     depends_on = [
         module.cloudflare-dns,

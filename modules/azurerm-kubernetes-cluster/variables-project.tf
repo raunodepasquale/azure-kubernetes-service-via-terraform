@@ -17,3 +17,7 @@ variable "locationcode" {
 variable "azsubscriptionid" {
   description = "The Azure Subscription in which all resources in this example should be provisioned (sensitive data, not stored in git repo)"
 }
+
+variable "tenantdomain" {
+  description = "The default email domain for the tenant in Azure Active Directory"
+}
