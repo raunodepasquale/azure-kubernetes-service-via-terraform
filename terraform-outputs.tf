@@ -38,7 +38,7 @@ output "webapphostname" {
   value = lower("${var.webhostname}.${var.webbasedns}")
 }
 
-output "finalcomment" {
+output "zz-finalcomment" {
   value = "It's time to configure your Prestashop connecting to ${lower("${var.webhostname}.${var.webbasedns}")}"
 }
 
