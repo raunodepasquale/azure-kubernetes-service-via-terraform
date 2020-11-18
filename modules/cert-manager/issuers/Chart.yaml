@@ -1,5 +1,5 @@
 apiVersion: v1
-appVersion: "0.1.0"
+appVersion: "1.0.0"
 description: Let's Encrypt Cluster Issuers for Cert-Manager
 name: issuers
-version: 0.1.0
+version: 1.0.0

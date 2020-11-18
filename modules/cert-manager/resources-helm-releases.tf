@@ -3,7 +3,7 @@ resource "helm_release" "cert-manager" {
   chart = "cert-manager"
   repository = "https://charts.jetstack.io"
   namespace = "cert-manager"
-  version = "v0.15.2"
+  version = "v1.0.4"
 
   set {
     name  = "installCRDs"
@@ -20,7 +20,7 @@ resource "helm_release" "issuers" {
   chart = "issuers"
   repository = "./modules/cert-manager"
   namespace = "cert-manager"
-  version = "0.1.0"
+  version = "1.0.0"
 
   set {
     name  = "email.production"
