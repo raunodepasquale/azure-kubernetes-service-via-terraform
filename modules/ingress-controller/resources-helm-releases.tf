@@ -3,6 +3,7 @@ resource "helm_release" "ingress-nginx" {
   chart = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   version = "v3.10.1"
+  namespace = var.namespace
 
   set {
     name  = "namespace"
@@ -10,7 +11,7 @@ resource "helm_release" "ingress-nginx" {
   }
 
   set {
-    name  = "controller.service.loadBalancerIP "
+    name  = "controller.service.loadBalancerIP"
     value = azurerm_public_ip.ingress.ip_address
   }
 
