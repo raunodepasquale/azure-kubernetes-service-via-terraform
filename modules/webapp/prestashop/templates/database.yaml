@@ -1,0 +1,81 @@
+apiVersion: v1
+data:
+  password: {{ .Values.database.password }}
+kind: Secret
+metadata:
+  name: mysql-pass
+  namespace: {{ .Values.namespace.name }}
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    app: {{ .Values.app.name }}
+    tier: database
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: {{ .Values.app.name }}
+    tier: database
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    app: prestashop
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.database.disk }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    app: {{ .Values.app.name }}
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: {{ .Values.app.name }}
+        tier: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        tier: database
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        args:
+        - "--ignore-db-dir=lost+found"
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim

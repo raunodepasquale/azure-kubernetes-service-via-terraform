@@ -34,6 +34,12 @@ provider "helm" {
   }
 }
 
+provider "cloudflare" {
+  version = "2.13.2"
+  email   = var.cloudflare_email
+  api_key = var.cloudflare_api_key
+}
+
 provider "null" {
   version = "3.0.0"
 }

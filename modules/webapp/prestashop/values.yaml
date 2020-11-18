@@ -1,0 +1,24 @@
+namespace:
+    name: webappdemo
+    cpu:
+        limit: 250m
+        request: 50m
+    memory:
+        limit: 512Mi
+        request: 128Mi
+    quota:
+        cpu:
+            limit: 2
+            request: 1
+        memory:
+            limit: 4Gi
+            request: 2048Mi
+        pod: 5
+app:
+    name: webappdemo
+    hostname: webappdemo.mydomain.com
+database:
+    disk: 4Gi
+    password: YW55cGFzc3dvcmR5b3VsaWtl
+issuer:
+    name: letsencrypt-production

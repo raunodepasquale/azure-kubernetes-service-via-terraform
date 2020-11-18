@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-cpu-limit-range
+  namespace: {{ .Values.namespace.name }}
+spec:
+  limits:
+  - default:
+      cpu: {{ .Values.namespace.cpu.limit }}
+      memory: {{ .Values.namespace.memory.limit }}
+    defaultRequest:
+      cpu: {{ .Values.namespace.cpu.request }}
+      memory: {{ .Values.namespace.memory.request }}
+    type: Container

@@ -13,3 +13,10 @@ variable "azclientsecret" {
 variable "aztenantid" {
   description = "The Azure Tentant in which all resources in this example should be provisioned (sensitive data, not stored in git repo)"
 }
+
+variable "cloudflare_email" {
+  description = "the email of the account used to interact with Cloudflare APIs to configure DNS record"
+}
+variable "cloudflare_api_key" {
+  description = "The API Key used to authenticate against Cloudflare APIs to configure DNS record"
+}
