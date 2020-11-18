@@ -1,5 +1,5 @@
 provider "azurerm" {
-    version = "=2.17.0"
+    version = "=2.36.0"
     features {}
     subscription_id = var.azsubscriptionid
     client_id = var.azclientid
@@ -8,7 +8,7 @@ provider "azurerm" {
 } 
 
 provider "azuread" {
-  version = "=0.9.0"
+  version = "=1.0.0"
   subscription_id = var.azsubscriptionid
   client_id = var.azclientid
   client_secret = var.azclientsecret
@@ -16,7 +16,7 @@ provider "azuread" {
 }
 
 provider "kubernetes" {
-  version = "1.11.3"
+  version = "1.13.3"
   host                   = module.kubernetes.host
   client_certificate     = base64decode(module.kubernetes.client_certificate)
   client_key             = base64decode(module.kubernetes.client_key)
@@ -24,7 +24,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  version = "1.2.3"
+  version = "1.3.2"
   kubernetes {
     host     = module.kubernetes.host
 
@@ -35,9 +35,9 @@ provider "helm" {
 }
 
 provider "null" {
-  version = "2.1.0"
+  version = "3.0.0"
 }
 
 provider "random" {
-  version = "2.3.0"
+  version = "3.0.0"
 }

@@ -14,8 +14,7 @@ module "network" {
     subnet_cidr             = var.subnet_cidr
 }
 module "kubernetes" {
-    # Module reference via path (azurerm-kubernetes-cluster for AKS or azurerm-kubernetes-cluster-ad-integrated to have aks with rbac integrated with Azure AD)
-    # azurerm-kubernetes-cluster-ad-integrated requires the services principal used to interact with Azure to have Global Admin rights in Azure AD
+    # Module reference via path 
     source                  = "./modules/azurerm-kubernetes-cluster"
     # values for module variables
     prefix                  = var.prefix
@@ -38,6 +37,14 @@ module "kubernetes" {
     docker_bridge_cidr      = var.docker_bridge_cidr
     dns_service_ip          = var.dns_service_ip
     subnet_id               = module.network.subnet_id
+    admin_group_objects_ids = module.admin_group_objects_ids
+    api_server_authorized_ip_ranges = module.api_server_authorized_ip_ranges
+    balance_similar_node_groups = module.balance_similar_node_groups
+    max_graceful_termination_sec = module.max_graceful_termination_sec
+    scale_down_delay_after_add = module.scale_down_delay_after_add
+    scale_down_unneeded = module.scale_down_unneeded
+    scan_interval = module.scan_interval
+    scale_down_utilization_threshold = module.scale_down_utilization_threshold
 }
 
 module "ingress" {

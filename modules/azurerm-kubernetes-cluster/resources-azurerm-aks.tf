@@ -4,6 +4,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = var.location
   resource_group_name = azurerm_resource_group.k8s.name
   dns_prefix          = "aks-${var.prefix}-${var.env}-${var.locationcode}"
+  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
+  kubernetes_version = var.orchestrator_version
 
   default_node_pool {
     name            = "default"
@@ -23,6 +25,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     client_id     = azuread_application.aks_sp.application_id
     client_secret = random_password.aks_sp_pwd.result
   }
+  azure_active_directory {
+    managed     = true
+    admin_group_objects_ids = var.admin_group_objects_ids
+  }
   role_based_access_control {
     enabled = true
   }
@@ -32,6 +38,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
       service_cidr = var.service_cidr
       docker_bridge_cidr = var.docker_bridge_cidr
       dns_service_ip = var.dns_service_ip
+  }
+  auto_scaler_profile {
+      balance_similar_node_groups =  var.balance_similar_node_groups
+      max_graceful_termination_sec  = var.max_graceful_termination_sec
+      scale_down_delay_after_add = var.scale_down_delay_after_add
+      scale_down_unneeded = var.scale_down_unneeded
+      scan_interval = var.scan_interval
+      scale_down_utilization_threshold = var.scale_down_utilization_threshold
   }
   addon_profile {
     kube_dashboard {

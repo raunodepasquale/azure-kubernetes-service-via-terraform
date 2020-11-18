@@ -4,3 +4,5 @@ azclientsecret = "AAAAAA.AAAAAAAAAAAAAAAAAAAAA-AAAA"
 aztenantid = "00000000-0000-0000-0000-00000000000"
 certmanager-emailstaging = "user@example.com"
 certmanager-emailproduction = "user@example.com"
+admin_group_objects_ids = ["00000000-0000-0000-0000-000000000000","01010101-0101-0101-0101-010101010101"]
+admin_group_objects_ids = ["123.124.125.126/32","1.1.1.0/24"]

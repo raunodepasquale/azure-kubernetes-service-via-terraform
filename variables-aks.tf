@@ -67,3 +67,36 @@ variable "docker_bridge_cidr" {
   description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes, it must not conflict with the other networks"
   default = "172.31.255.1/24"
 }
+
+variable "admin_group_objects_ids" {
+  description = "A list of Objects IDs of Azure Active Directory Groups which should have Admin Role on the Cluster, it can be left empty if none required"
+}
+
+variable "api_server_authorized_ip_ranges" {
+  description = "IP ranges having access to the cluster APIs"
+}
+
+variable "balance_similar_node_groups" {
+  description = "Detect similar node groups and balance the number of nodes between them"
+  default = "true"
+}
+variable "max_graceful_termination_sec" {
+  description = "Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node"
+  default = 300
+}
+variable "scale_down_delay_after_add" {
+  description = "How long after the scale up of AKS nodes the scale down evaluation resumes"
+  default = "10m"
+}
+variable "scale_down_unneeded" {
+  description = "How long a node should be unneeded before it is eligible for scale down"
+  default = "10m"
+}
+variable "scan_interval" {
+  description = "How long a node should be unneeded before it is eligible for scale down."
+  default = "15s"
+}
+variable "scale_down_utilization_threshold" {
+  description = "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down"
+  default = 0.4
+}
