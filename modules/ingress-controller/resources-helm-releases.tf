@@ -9,7 +9,7 @@ resource "helm_release" "ingress-nginx" {
   }
   depends_on = [
     null_resource.delay,
-    kubernetes_namespace.cert-manager
+    kubernetes_namespace.ingress
   ]
 }
 
