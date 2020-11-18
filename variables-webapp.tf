@@ -7,10 +7,6 @@ variable "webbasedns" {
   description = "The base DNS zone to be used to compose the FQDN of the web applications, as example: mydomain.com"
 }
 
-variable "webappfqdnhostname" {
-  description = lower("${var.webhostname}.${var.webbasedns}")
-}
-
 variable "webappnamespace" {
   description = "The name of the namespace used to host the webapp"
 }

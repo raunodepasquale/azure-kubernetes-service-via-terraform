@@ -45,6 +45,11 @@ module "kubernetes" {
     scale_down_unneeded = var.scale_down_unneeded
     scan_interval = var.scan_interval
     scale_down_utilization_threshold = var.scale_down_utilization_threshold
+
+    depends_on = [
+        module.network
+    ]
+
 }
 
 module "ingress" {
@@ -55,6 +60,11 @@ module "ingress" {
     env                     = var.env
     locationcode            = var.locationcode
     location                = var.location
+
+    depends_on = [
+        module.kubernetes
+    ]
+
 }
 
 module "cert-manager" {
@@ -63,6 +73,11 @@ module "cert-manager" {
     namespace               = var.certmanager-namespace
     emailproduction         = var.certmanager-emailproduction
     emailstaging            = var.certmanager-emailstaging
+
+    depends_on = [
+        module.ingress
+    ]
+
 }
 
 module "cloudflare-dns" {
@@ -73,12 +88,17 @@ module "cloudflare-dns" {
     publicip = module.ingress.public_ip
     proxied = var.proxied
     dnsttl = var.dnsttl
+
+    depends_on = [
+        module.ingress
+    ]
+
  }
 
  module "webapp" {
     # Module reference via path
     source                  = "./modules/webapp"
-    hostname = var.webappfqdnhostname
+    hostname = lower("${var.webhostname}.${var.webbasedns}")
     namespace = var.webappnamespace
     cpu_limit = var.cpu_limit
     cpu_request = var.cpu_request
@@ -91,4 +111,10 @@ module "cloudflare-dns" {
     quota_pod = var.quota_pod
     database_disk = var.database_disk
     issuer_name = var.webappissuer_name
+
+    depends_on = [
+        module.cloudflare-dns,
+        module.cert-manager,
+        module.ingress
+    ]
  }
