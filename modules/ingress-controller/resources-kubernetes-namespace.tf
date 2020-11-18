@@ -1,6 +1,6 @@
 resource "null_resource" "delay" {
   provisioner "local-exec" {
-    command = "sleep 60"
+    command = "sleep 90"
   }
 }
 resource "kubernetes_namespace" "ingress" {
