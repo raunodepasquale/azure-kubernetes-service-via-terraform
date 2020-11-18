@@ -16,6 +16,7 @@ resource "azuread_service_principal" "aks_sp" {
 resource "random_password" "aks_sp_pwd" {
   length  = 16
   special = true
+  override_special = "_%!£"
 }
 
 resource "azuread_service_principal_password" "aks_sp_pwd" {
@@ -37,6 +38,7 @@ resource "azurerm_role_assignment" "aks_sp_role_assignment" {
 resource "random_password" "aks_user_pwd" {
   length  = 16
   special = true
+  override_special = "_%!£"
 }
 
 resource "azuread_user" "aks_admin" {
