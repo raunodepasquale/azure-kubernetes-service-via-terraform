@@ -16,17 +16,25 @@ provider "azuread" {
 
 provider "kubernetes" {
   version = "1.13.3"
-  load_config_file = "true"
-  config_context = "${module.kubernetes.aksname}-admin"
-  config_context_cluster = module.kubernetes.aksname
+  load_config_file = "false"
+  host                   = module.kubernetes.host
+  username               = module.kubernetes.aksusername
+  password               = module.kubernetes.akspassword
+  client_certificate     = base64decode(module.kubernetes.client_certificate)
+  client_key             = base64decode(module.kubernetes.client_key)
+  cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
 }
 
 provider "helm" {
   version = "1.3.2"
   kubernetes {
-    load_config_file = "true"
-    config_context = "${module.kubernetes.aksname}-admin"
-    config_context_cluster = module.kubernetes.aksname
+    load_config_file = "false"
+    host                   = module.kubernetes.host
+    username               = module.kubernetes.aksusername
+    password               = module.kubernetes.akspassword
+    client_certificate     = base64decode(module.kubernetes.client_certificate)
+    client_key             = base64decode(module.kubernetes.client_key)
+    cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
   }
 }
 
