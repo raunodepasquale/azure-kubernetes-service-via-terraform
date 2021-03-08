@@ -15,7 +15,7 @@ variable "node_max_count" {
 
 variable "vm_size" {
   description = "Azure VM series to be used to create nodes on the node pool in AKS"
-  default = "Standard_B2ms"
+  default = "Standard_B4ms"
 }
 
 variable "disk_size" {

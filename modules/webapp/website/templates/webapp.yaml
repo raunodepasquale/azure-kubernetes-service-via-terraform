@@ -70,7 +70,11 @@ spec:
         app: {{ .Values.app.name }}
         tier: web
     spec:
-      containers:
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "until nc -zv mysql 3306; do echo waiting for myservice; sleep 2; done"]
+      containers:  
       - image: wordpress
         name: wordpress
         readinessProbe:
